@@ -7,8 +7,8 @@ using namespace Rcpp;
 //' @param x
 //' @param y
 //' @export
-// [[Rcpp::export]]
 // [[Rcpp::interfaces(r, cpp)]]
+// [[Rcpp::export]]
 double add_cpp(double x, double y) {
   double value = x + y;
   return value;

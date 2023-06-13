@@ -24,6 +24,27 @@ namespace pkgrcpp {
         }
     }
 
+    inline double add_cpp(double x, double y) {
+        typedef SEXP(*Ptr_add_cpp)(SEXP,SEXP);
+        static Ptr_add_cpp p_add_cpp = NULL;
+        if (p_add_cpp == NULL) {
+            validateSignature("double(*add_cpp)(double,double)");
+            p_add_cpp = (Ptr_add_cpp)R_GetCCallable("pkgrcpp", "_pkgrcpp_add_cpp");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_add_cpp(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(y)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
 }
 
 #endif // RCPP_pkgrcpp_RCPPEXPORTS_H_GEN_
