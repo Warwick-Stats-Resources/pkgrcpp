@@ -12,7 +12,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 LinkingTo: 
     dqrng,
-    Rcpp
+    Rcpp,
+    RcppArmadillo
 Imports: 
     Rcpp
 URL: https://github.com/Warwick-Stats-Resources/pkgrcpp
